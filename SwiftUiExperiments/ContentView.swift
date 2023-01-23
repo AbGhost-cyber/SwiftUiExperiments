@@ -80,19 +80,22 @@ struct GPAProgressBar: View {
     var body: some View {
         ZStack {
             Circle()
-                .stroke(color.opacity(0.4), lineWidth: 10)
+                .stroke(color.opacity(0.4), lineWidth: 8)
             Circle()
                 .trim(from: 0, to: gpa / maxGPA)
-                .stroke(style: .init(lineWidth: 12, lineCap: .round))
+                .stroke(style: .init(lineWidth: 8, lineCap: .round))
                 .scale(x: -1)
                 .foregroundColor(color)
                 .animation(.easeOut, value: gpa / maxGPA)
                 .rotationEffect(.degrees(90))
             VStack {
-                Text("\(gpa.roundedTwo) \nGPA")
+                Text("\(gpa.roundedTwo)")
                     .foregroundColor(.accentColor)
                     .font(.headline)
                     .bold()
+                Text("GPA")
+                    .foregroundColor(Color(uiColor: .secondaryLabel))
+                    .font(.subheadline)
             }.multilineTextAlignment(.center)
             .onAppear {
                 if gpa >= 3.0 {
@@ -101,7 +104,7 @@ struct GPAProgressBar: View {
                     color = .red
                 }
             }
-        }.frame(maxWidth: 90)
+        }.frame(maxWidth: 70)
     }
 }
 struct ItemView: View {
