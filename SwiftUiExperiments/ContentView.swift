@@ -12,11 +12,16 @@ struct ContentView: View {
         VStack {
             Dial()
                 .padding()
+            
         }
         .padding()
     }
 }
-
+extension Double {
+    var roundedTwo: String {
+        return String(format: "%.2f", self)
+    }
+}
 struct SpokesView: View {
     var body: some View {
         ForEach(0..<360, id:\.self) { index in
@@ -44,8 +49,8 @@ struct Dial: View {
                     .padding(20)
                     .foregroundColor(.orange.opacity(0.5))
                 Circle()
-                    .trim(from: 0.4, to: 1.0)
-                    .stroke(style: .init(lineWidth: 15))
+                    .trim(from: GpaValue.max.rawValue, to: 1.0)
+                    .stroke(style: .init(lineWidth: 15, lineCap: .round))
                     .rotation(.degrees(-90))
                     .padding(20)
                 VStack(alignment: .center) {
@@ -63,25 +68,40 @@ struct Dial: View {
     }
 }
 
-struct ProgressBar: View {
-    let color: Color
-    let text: String
+enum GpaValue: CGFloat {
+    case max = 0.4
+}
+
+
+struct GPAProgressBar: View {
+   @State private var color: Color = .red
+    var gpa: Double
+    let maxGPA = 4.0
     var body: some View {
         ZStack {
             Circle()
                 .stroke(color.opacity(0.4), lineWidth: 10)
             Circle()
-                .trim(from: 0.3, to: 1.0)
-                .stroke(color, lineWidth: 10)
-                .rotationEffect(.degrees(-90))
+                .trim(from: 0, to: gpa / maxGPA)
+                .stroke(style: .init(lineWidth: 12, lineCap: .round))
+                .scale(x: -1)
+                .foregroundColor(color)
+                .animation(.easeOut, value: gpa / maxGPA)
+                .rotationEffect(.degrees(90))
             VStack {
-                Text(text)
+                Text("\(gpa.roundedTwo) \nGPA")
                     .foregroundColor(.accentColor)
                     .font(.headline)
-                    .frame(width: .infinity, alignment: .center)
                     .bold()
+            }.multilineTextAlignment(.center)
+            .onAppear {
+                if gpa >= 3.0 {
+                    color = .green
+                } else {
+                    color = .red
+                }
             }
-        }
+        }.frame(maxWidth: 90)
     }
 }
 struct ItemView: View {
@@ -96,17 +116,13 @@ struct ItemView: View {
                     .foregroundColor(Color(uiColor: .secondaryLabel))
             }
             Spacer()
-            ProgressBar(color: .red, text: "2.40")
-                .padding([.leading])
-                .frame(width: 90, height: 60, alignment: .trailing)
+            GPAProgressBar(gpa: 4.0)
         }
         .padding()
     }
 }
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-       // ContentView()
+struct SomeView: View {
+    var body: some View {
         NavigationStack {
             ScrollView {
                 HStack {
@@ -158,6 +174,22 @@ struct ContentView_Previews: PreviewProvider {
             }
         }
         .previewLayout(.sizeThatFits)
+    }
+}
+struct MyView: View {
+    @State var gpa:Double = 0
+    var body: some View {
+        VStack {
+            GPAProgressBar(gpa: gpa)
+            Slider(value: $gpa, in: 0...4)
+        }.padding()
+    }
+}
+struct ContentView_Previews: PreviewProvider {
+    @State var max: Double
+    static var previews: some View {
+     //  ContentView()
+       SomeView()
     }
 }
 
