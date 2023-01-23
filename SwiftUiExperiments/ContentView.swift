@@ -63,9 +63,101 @@ struct Dial: View {
     }
 }
 
+struct ProgressBar: View {
+    let color: Color
+    let text: String
+    var body: some View {
+        ZStack {
+            Circle()
+                .stroke(color.opacity(0.4), lineWidth: 10)
+            Circle()
+                .trim(from: 0.3, to: 1.0)
+                .stroke(color, lineWidth: 10)
+                .rotationEffect(.degrees(-90))
+            VStack {
+                Text(text)
+                    .foregroundColor(.accentColor)
+                    .font(.headline)
+                    .frame(width: .infinity, alignment: .center)
+                    .bold()
+            }
+        }
+    }
+}
+struct ItemView: View {
+    var body: some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 4) {
+                Text("First Semester")
+                    .font(.headline)
+                    .bold()
+                Text("Maths, Biology, Chemistry")
+                    .font(.subheadline)
+                    .foregroundColor(Color(uiColor: .secondaryLabel))
+            }
+            Spacer()
+            ProgressBar(color: .red, text: "2.40")
+                .padding([.leading])
+                .frame(width: 90, height: 60, alignment: .trailing)
+        }
+        .padding()
+    }
+}
+
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+       // ContentView()
+        NavigationStack {
+            ScrollView {
+                HStack {
+                    Text("Recent").bold()
+                    Spacer()
+                    Button {
+                        
+                    } label: {
+                        Text("View All")
+                        Image(systemName: "chevron.right")
+                    }
+
+                }
+                .padding()
+                ForEach(0..<2) { j in
+                    Section {
+                        VStack {
+                            ForEach(0..<3) { i in
+                                ItemView()
+                                Divider()
+                                    .opacity(i == 9 ? 0: 1)
+                            }
+                        }
+                        .background(RoundedRectangle(cornerRadius: 12)
+                            .stroke(Color.gray.opacity(0.3)))
+                        .padding([.leading, .trailing])
+                        .padding(.bottom, 10)
+                    } header: {
+                        Text("FIRST YEAR")
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .font(.caption)
+                            .foregroundColor(Color(uiColor: .secondaryLabel))
+                            .padding(.leading)
+                    }
+                }
+            }
+            .navigationTitle("Semesters")
+            .toolbar {
+                ToolbarItem {
+                    Button {
+                        
+                    } label: {
+                        Image(systemName: "plus")
+                            .renderingMode(.template)
+                            .foregroundColor(.accentColor)
+                    }
+
+                }
+            }
+        }
+        .previewLayout(.sizeThatFits)
     }
 }
 
