@@ -74,7 +74,7 @@ enum GpaValue: CGFloat {
 
 
 struct GPAProgressBar: View {
-   @State private var color: Color = .red
+    @State private var color: Color = .red
     var gpa: Double
     let maxGPA = 4.0
     var body: some View {
@@ -90,20 +90,20 @@ struct GPAProgressBar: View {
                 .rotationEffect(.degrees(90))
             VStack {
                 Text("\(gpa.roundedTwo)")
-                    .foregroundColor(.accentColor)
+                    .foregroundColor(.black)
                     .font(.headline)
                     .bold()
                 Text("GPA")
                     .foregroundColor(Color(uiColor: .secondaryLabel))
                     .font(.subheadline)
             }.multilineTextAlignment(.center)
-            .onAppear {
-                if gpa >= 3.0 {
-                    color = .green
-                } else {
-                    color = .red
+                .onAppear {
+                    if gpa >= 3.0 {
+                        color = .blue
+                    } else {
+                        color = .red
+                    }
                 }
-            }
         }.frame(maxWidth: 70)
     }
 }
@@ -119,15 +119,58 @@ struct ItemView: View {
                     .foregroundColor(Color(uiColor: .secondaryLabel))
             }
             Spacer()
-            GPAProgressBar(gpa: 4.0)
+            GPAProgressBar(gpa: 3.0)
         }
         .padding()
     }
 }
+var mData: Dictionary<String,[SavingsDataPoint]> = ["year": [
+    .init(month: "First Year", value: 3.80),
+    .init(month: "Second Year", value: 2.85),
+    .init(month: "Third Year", value: 3.20),
+    .init(month: "Fourth Year", value: 3.70)
+], "semester": [
+    .init(month: "1st yr", value: 3.00, color: "Blue"),
+    .init(month: "1st yr", value: 4.00, color: "Yellow"),
+    .init(month: "2nd yr", value: 4.00,color: "Blue"),
+    .init(month: "2nd yr", value: 3.24, color: "Yellow"),
+    .init(month: "3rd yr", value: 3.20, color: "Blue"),
+    .init(month: "3rd yr", value: 3.50, color: "Yellow"),
+    .init(month: "4th yr", value: 3.50, color: "Blue"),
+    .init(month: "4th yr", value: 3.90, color: "Yellow")],
+                                                    "course": []]
 struct SomeView: View {
+    @State private var selectedTab = "year"
+    let tabs = ["year", "semester", "course"]
+    @State private var chartOptions = Options(type: "year", xLabel: "Year (Academic)", yLabel: "CGPA")
     var body: some View {
         NavigationStack {
             ScrollView {
+                HeaderView(title: "My Semesters")
+                    .padding(.horizontal)
+                SegmentedPicker(selectedTab: $selectedTab, data: tabs)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                //MARK: chat view
+                MyChartView(data: mData[selectedTab]!, options: $chartOptions)
+                    .frame(minHeight: 250)
+                    .padding()
+                    .animation(.easeInOut, value: selectedTab)
+                    .onChange(of: selectedTab) { newValue in
+                        if newValue == "semester" {
+                            chartOptions.type = newValue
+                            chartOptions.xLabel = "All Semesters"
+                            chartOptions.yLabel = "GPA"
+                        }else if newValue == "year" {
+                            chartOptions.type = newValue
+                            chartOptions.xLabel = "Year (Academic)"
+                            chartOptions.yLabel = "CGPA"
+                        } else {
+                            chartOptions.type = newValue
+                            chartOptions.xLabel = "All Courses"
+                            chartOptions.yLabel = "GPA"
+                        }
+                    }
                 HStack {
                     Text("Recent").bold()
                     Spacer()
@@ -137,13 +180,13 @@ struct SomeView: View {
                         Text("View All")
                         Image(systemName: "chevron.right")
                     }
-
+                    
                 }
                 .padding()
                 ForEach(0..<2) { j in
                     Section {
                         VStack {
-                            ForEach(0..<3) { i in
+                            ForEach(0..<2) { i in
                                 ItemView()
                                 Divider()
                                     .opacity(i == 9 ? 0: 1)
@@ -162,19 +205,6 @@ struct SomeView: View {
                     }
                 }
             }
-            .navigationTitle("Semesters")
-            .toolbar {
-                ToolbarItem {
-                    Button {
-                        
-                    } label: {
-                        Image(systemName: "plus")
-                            .renderingMode(.template)
-                            .foregroundColor(.accentColor)
-                    }
-
-                }
-            }
         }
         .previewLayout(.sizeThatFits)
     }
@@ -191,8 +221,8 @@ struct MyView: View {
 struct ContentView_Previews: PreviewProvider {
     @State var max: Double
     static var previews: some View {
-     //  ContentView()
-       SomeView()
+        //  ContentView()
+        SomeView()
     }
 }
 
