@@ -138,7 +138,6 @@ struct MyChartView: View {
         .chartYAxis {
             AxisMarks(position: .leading, values: .stride(by: 1.5)) { value in
                 AxisGridLine()
-                AxisTick()
                 if let value = value.as(Double.self) {
                     AxisValueLabel(offsetsMarks: true) {
                         Text(value.roundedTwo)

@@ -119,7 +119,7 @@ struct ItemView: View {
                     .foregroundColor(Color(uiColor: .secondaryLabel))
             }
             Spacer()
-            GPAProgressBar(gpa: 3.0)
+            GPAProgressBar(gpa: 2.5)
         }
         .padding()
     }
@@ -136,7 +136,6 @@ var mData: Dictionary<String,[SavingsDataPoint]> = ["year": [
     .init(month: "2nd yr", value: 3.24, color: "Yellow"),
     .init(month: "3rd yr", value: 3.20, color: "Blue"),
     .init(month: "3rd yr", value: 3.50, color: "Yellow"),
-    .init(month: "4th yr", value: 3.50, color: "Blue"),
     .init(month: "4th yr", value: 3.90, color: "Yellow")],
                                                     "course": []]
 struct SomeView: View {
@@ -164,7 +163,7 @@ struct SomeView: View {
                         }else if newValue == "year" {
                             chartOptions.type = newValue
                             chartOptions.xLabel = "Year (Academic)"
-                            chartOptions.yLabel = "CGPA"
+                            chartOptions.yLabel = "CGPA (per year)"
                         } else {
                             chartOptions.type = newValue
                             chartOptions.xLabel = "All Courses"
