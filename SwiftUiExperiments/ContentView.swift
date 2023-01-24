@@ -109,19 +109,27 @@ struct GPAProgressBar: View {
 }
 struct ItemView: View {
     var body: some View {
-        HStack {
-            VStack(alignment: .leading, spacing: 4) {
-                Text("First Semester")
-                    .font(.headline)
-                    .bold()
-                Text("Maths, Biology, Chemistry")
-                    .font(.subheadline)
-                    .foregroundColor(Color(uiColor: .secondaryLabel))
+        NavigationLink {
+            //Destination
+            Text("Hi")
+        } label: {
+            //Component
+            HStack {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("First Semester")
+                        .font(.headline)
+                        .foregroundColor(.primary)
+                        .bold()
+                    Text("Maths, Biology, Chemistry")
+                        .font(.subheadline)
+                        .foregroundColor(Color(uiColor: .secondaryLabel))
+                }
+                Spacer()
+                GPAProgressBar(gpa: 2.5)
             }
-            Spacer()
-            GPAProgressBar(gpa: 2.5)
         }
-        .padding()
+
+
     }
 }
 var mData: Dictionary<String,[SavingsDataPoint]> = ["year": [
@@ -187,6 +195,7 @@ struct SomeView: View {
                         VStack {
                             ForEach(0..<2) { i in
                                 ItemView()
+                                    .padding()
                                 Divider()
                                     .opacity(i == 9 ? 0: 1)
                             }
