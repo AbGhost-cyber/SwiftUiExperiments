@@ -48,7 +48,7 @@ struct SwiftUIView: View {
                             .padding(20)
                             .frame(height: geo.size.height / 1.2)
                             .offset(x: 0, y: CGFloat(relativeIndex) * 8)
-                            .transition(transition(index: index))
+                            .transition(.asymmetric(insertion: .identity, removal: .move(edge: Edge.leading)))
                             .scaleEffect(1 - 0.1 * CGFloat(relativeIndex), anchor: .bottom)
                     }
                 }
@@ -56,22 +56,20 @@ struct SwiftUIView: View {
             .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
             .overlay {
                 if isFinished {
-                    Text("GOOD JOB! 😈")
-                        .font(.largeTitle)
+                    Text("Restart")
+                        .font(.title2)
                         .bold()
                         .foregroundColor(.white)
-                        .animation(.easeOut, value: isFinished)
-                        .transition(.slide)
+                        .transition(.move(edge: .bottom))
+                        .frame(width: 120, height: 65)
+                        .background(Color.accentColor)
+                        .cornerRadius(12)
+                        .onTapGesture {
+                            currentIndex = 0
+                            isFinished = false
+                        }
                 }
             }
-        }
-    }
-    
-    private func transition(index: Int) -> AnyTransition {
-        if currentIndex == index && hasStarted {
-            return .move(edge: .leading)
-        } else {
-            return .identity
         }
     }
     
@@ -95,7 +93,7 @@ struct SwiftUIView: View {
                     .bold()
                 HStack {
                     Button {
-                        withAnimation(.easeInOut) {
+                        withAnimation {
                             isBackTrack = true
                             currentIndex = colors.index(before: index)
                         }
@@ -124,6 +122,7 @@ struct SwiftUIView: View {
                               .frame(maxWidth: 200, maxHeight: 65)
                               .background(Color.accentColor)
                               .cornerRadius(10)
+                              .transition(.move(edge: .bottom))
                       }
 
 

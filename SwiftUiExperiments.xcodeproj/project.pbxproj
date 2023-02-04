@@ -13,6 +13,7 @@
 		045FD513297D59A30045DB65 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 045FD512297D59A30045DB65 /* Preview Assets.xcassets */; };
 		045FD51A297EB4910045DB65 /* ChartKindaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FD519297EB4910045DB65 /* ChartKindaView.swift */; };
 		04EC4716298BFD2500CD1457 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC4715298BFD2500CD1457 /* SwiftUIView.swift */; };
+		04F0A282298E3BA4004DD321 /* CardStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F0A281298E3BA4004DD321 /* CardStack.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		045FD512297D59A30045DB65 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		045FD519297EB4910045DB65 /* ChartKindaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartKindaView.swift; sourceTree = "<group>"; };
 		04EC4715298BFD2500CD1457 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		04F0A281298E3BA4004DD321 /* CardStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStack.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				045FD511297D59A30045DB65 /* Preview Content */,
 				045FD519297EB4910045DB65 /* ChartKindaView.swift */,
 				04EC4715298BFD2500CD1457 /* SwiftUIView.swift */,
+				04F0A281298E3BA4004DD321 /* CardStack.swift */,
 			);
 			path = SwiftUiExperiments;
 			sourceTree = "<group>";
@@ -147,6 +150,7 @@
 				045FD51A297EB4910045DB65 /* ChartKindaView.swift in Sources */,
 				04EC4716298BFD2500CD1457 /* SwiftUIView.swift in Sources */,
 				045FD50C297D59A10045DB65 /* SwiftUiExperimentsApp.swift in Sources */,
+				04F0A282298E3BA4004DD321 /* CardStack.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
