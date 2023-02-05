@@ -11,7 +11,9 @@ import SwiftUI
 struct SwiftUiExperimentsApp: App {
     var body: some Scene {
         WindowGroup {
-            CardStack()
+            NavigationStack {
+                CardStack()
+            }
         }
     }
 }
