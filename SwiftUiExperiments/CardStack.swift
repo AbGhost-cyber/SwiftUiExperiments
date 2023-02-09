@@ -28,6 +28,7 @@ struct CardStack: View {
     @Environment(\.colorScheme) var colorScheme
     
     @State private var props: CardProps = CardProps()
+    @State private var selectedAnswer = -1
     
     var body: some View {
         GeometryReader { geo in
@@ -88,7 +89,7 @@ struct CardStack: View {
                         Text("Select an answer")
                             .foregroundColor(!isDark ? .white.opacity(0.5) : .gray)
                             .bold()
-                        Text("What do people mean when type the letters 'FTW' in a message on the internet?")
+                        Text("🤔 What do people mean when type the letters 'FTW' in a message on the internet?")
                             .foregroundColor(isDark ? .black : .white)
                             .font(.title2)
                             .bold()
@@ -100,6 +101,7 @@ struct CardStack: View {
                                 withAnimation(Animation.easeOut(duration: 0.35)) {
                                     props.currentIndex = colors.index(before: index)
                                     props.isBackTracking = true
+                                    selectedAnswer = -1
                                 }
                             } label: {
                                 Text("Back")
@@ -114,6 +116,7 @@ struct CardStack: View {
                                     props.isBackTracking = false
                                     props.hasReachedEnd = index == colors.count - 1
                                     props.currentIndex = colors.index(after: index)
+                                    selectedAnswer = -1
                                 }
                             } label: {
                                 Text("Next")
@@ -141,24 +144,48 @@ struct CardStack: View {
     
     private var answersView: some View {
         ForEach(0..<4) { i in
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(!isDark ? .white.opacity(0.5) : .gray, lineWidth: 3)
-                .frame(height: 70)
-                .padding(5)
-                .overlay {
-                    let text = i + 1 == 4 ? "\(i + 1) and more" : "\(i + 1)"
-                    HStack {
-                        Image(systemName: i == 3 ? "checkmark.circle.fill": "circle")
-                            .symbolRenderingMode(.monochrome)
-                            .foregroundColor(isDark ? .black : .white)
-                        Text(text)
-                            .foregroundColor(isDark ? .black : .white)
-                            .bold()
-                        Spacer()
+            let isSelected = selectedAnswer == i
+            ZStack {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(isSelected ? .purple.opacity(0.4) : .clear)
+                    .overlay {
+                        let text = i + 1 == 4 ? "\(i + 1) and more" : "\(i + 1)"
+                        HStack {
+                            Image(systemName: isSelected ? "checkmark.circle.fill": "circle")
+                                .symbolRenderingMode(.palette)
+                                .foregroundStyle(getIconPriColor(isSelected: isSelected), .purple)
+                            Text(text)
+                                .foregroundColor(isDark ? .black : .white)
+                                .bold()
+                            Spacer()
+                        }
+                        .padding(20)
                     }
-                    .padding(20)
-                }
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(getStrokeColor(isSelected: isSelected), lineWidth: 1.5)
+            }
+            .frame(height: 70)
+            .padding(5)
+            .onTapGesture {
+                selectedAnswer = i
+            }
         }
+    }
+    
+    private func getStrokeColor(isSelected: Bool) -> Color {
+        if isSelected {
+            return .purple
+        }
+        if isDark {
+            return .gray
+        }
+        return .white.opacity(0.5)
+    }
+    private func getIconPriColor(isSelected: Bool) -> Color {
+        if isSelected || !isDark {
+            return .white
+        }
+        return .gray
     }
     
     func getColor(relativeIndex: Int) -> Color {

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0428F0612995471600CA4A37 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0428F0602995471600CA4A37 /* Service.swift */; };
 		045FD50C297D59A10045DB65 /* SwiftUiExperimentsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FD50B297D59A10045DB65 /* SwiftUiExperimentsApp.swift */; };
 		045FD50E297D59A10045DB65 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FD50D297D59A10045DB65 /* ContentView.swift */; };
 		045FD510297D59A30045DB65 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 045FD50F297D59A30045DB65 /* Assets.xcassets */; };
@@ -14,9 +15,11 @@
 		045FD51A297EB4910045DB65 /* ChartKindaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 045FD519297EB4910045DB65 /* ChartKindaView.swift */; };
 		04EC4716298BFD2500CD1457 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EC4715298BFD2500CD1457 /* SwiftUIView.swift */; };
 		04F0A282298E3BA4004DD321 /* CardStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F0A281298E3BA4004DD321 /* CardStack.swift */; };
+		04F0A2862990EDB8004DD321 /* CategoriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04F0A2852990EDB8004DD321 /* CategoriesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0428F0602995471600CA4A37 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		045FD508297D59A10045DB65 /* SwiftUiExperiments.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftUiExperiments.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		045FD50B297D59A10045DB65 /* SwiftUiExperimentsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUiExperimentsApp.swift; sourceTree = "<group>"; };
 		045FD50D297D59A10045DB65 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -25,6 +28,7 @@
 		045FD519297EB4910045DB65 /* ChartKindaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartKindaView.swift; sourceTree = "<group>"; };
 		04EC4715298BFD2500CD1457 /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 		04F0A281298E3BA4004DD321 /* CardStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardStack.swift; sourceTree = "<group>"; };
+		04F0A2852990EDB8004DD321 /* CategoriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,7 @@
 		045FD50A297D59A10045DB65 /* SwiftUiExperiments */ = {
 			isa = PBXGroup;
 			children = (
+				04ED6EB12994F2640061F232 /* Sockets */,
 				045FD50B297D59A10045DB65 /* SwiftUiExperimentsApp.swift */,
 				045FD50D297D59A10045DB65 /* ContentView.swift */,
 				045FD50F297D59A30045DB65 /* Assets.xcassets */,
@@ -64,6 +69,7 @@
 				045FD519297EB4910045DB65 /* ChartKindaView.swift */,
 				04EC4715298BFD2500CD1457 /* SwiftUIView.swift */,
 				04F0A281298E3BA4004DD321 /* CardStack.swift */,
+				04F0A2852990EDB8004DD321 /* CategoriesView.swift */,
 			);
 			path = SwiftUiExperiments;
 			sourceTree = "<group>";
@@ -74,6 +80,14 @@
 				045FD512297D59A30045DB65 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		04ED6EB12994F2640061F232 /* Sockets */ = {
+			isa = PBXGroup;
+			children = (
+				0428F0602995471600CA4A37 /* Service.swift */,
+			);
+			path = Sockets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -147,7 +161,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				045FD50E297D59A10045DB65 /* ContentView.swift in Sources */,
+				0428F0612995471600CA4A37 /* Service.swift in Sources */,
 				045FD51A297EB4910045DB65 /* ChartKindaView.swift in Sources */,
+				04F0A2862990EDB8004DD321 /* CategoriesView.swift in Sources */,
 				04EC4716298BFD2500CD1457 /* SwiftUIView.swift in Sources */,
 				045FD50C297D59A10045DB65 /* SwiftUiExperimentsApp.swift in Sources */,
 				04F0A282298E3BA4004DD321 /* CardStack.swift in Sources */,
